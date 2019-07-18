@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 
 import { createPersistedState, createSharedMutations } from 'vuex-electron'
 
-import modules from './modules'
+import modulesA from './modules'
+import number from "./number"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules,
+  modules:{
+    modulesA,
+    number
+  },
   plugins: [
     createPersistedState(),
     createSharedMutations()

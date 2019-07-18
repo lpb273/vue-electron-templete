@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
     <h1>second.vue</h1>我是第二个窗口
+    <h2>{{vuexData}}</h2>
     <el-button type="primary" @click="getMessage">接收渲染进程发送的消息</el-button>
   </div>
 </template>
@@ -14,7 +15,11 @@ export default {
     return {};
   },
   filters: {},
-  computed: {},
+  computed: {
+    vuexData() {
+      return this.$store.state;
+    }
+  },
   watch: {},
   methods: {
     getMessage() {

@@ -1,18 +1,22 @@
 <template>
   <div id="wrapper">
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue" />
-    <main>
       <el-button type="primary" @click="openNewWindow">创建窗口</el-button>
+    <!-- <main>
       <el-button type="primary" @click="exitNewWindow">关闭窗口</el-button>
       <el-button type="primary" @click="sendSyncMessage">发送同步消息</el-button>
       <el-button type="primary" @click="sendAsyncMessage">发送异步消息</el-button>
-    </main>
+    </main>-->
+    <p>module-numbers:{{addNum}}</p>
+    <p>module-modules:{{SHOW_MAIN}}</p>
+    <el-button type="primary" @click="addnumA">click</el-button>
   </div>
 </template>
 
 <script>
 import SystemInformation from "./LandingPage/SystemInformation";
 import { ipcRenderer, remote, ipcMain } from "electron";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "landing-page",
   data() {
@@ -22,14 +26,23 @@ export default {
   mounted() {
     // console.log(screen)
     // console.log(screen.getPrimaryDisplay().workAreaSize)
+    console.log(this);
+  },
+  computed: {
+    ...mapGetters(["addNum", "SHOW_MAIN"])
   },
   methods: {
+    ...mapMutations(["DECREMENT_MAIN_COUNTER"]),
+    ...mapActions(["someAsyncTask"]),
+    addnumA() {
+      this.someAsyncTask(111111);
+    },
     openNewWindow() {
-      console.log(remote);
+      // console.log(remote);
       ipcRenderer.send("create-new-window", {
         name: "firstWin",
         url: "/index",
-        data:{}
+        data: {}
       });
     },
     exitNewWindow() {

@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 import App from './App'
 import router from './router'
-import store from './store'
+import store from './store/index'
 
 import "@/assets/style/element-variables.scss"
 import "@/assets/style/reset.scss"

@@ -1,14 +1,32 @@
-/**
- * The file enables `@/store/index.js` to import all vuex modules
- * in a one-shot manner. There should not be any reason to edit this file.
- */
+const state = {
+  main: 0
+}
 
-const files = require.context('.', false, /\.js$/)
-const modules = {}
+const getters = {
+  SHOW_MAIN(state) {
+    return state.main
+  }
+}
 
-files.keys().forEach(key => {
-  if (key === './index.js') return
-  modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
-})
+const mutations = {
+  DECREMENT_MAIN_COUNTER(state) {
+    state.main--
+  },
+  INCREMENT_MAIN_COUNTER(state, payload) {
+    state.main += payload
+  }
+}
 
-export default modules
+const actions = {
+  someAsyncTask({ commit }, payload) {
+    console.log(payload)
+    commit('INCREMENT_MAIN_COUNTER', payload)
+  }
+}
+
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+}
